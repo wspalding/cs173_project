@@ -26,12 +26,14 @@ def main():
     
     for file in os.listdir(books_dir):
         start = time.time()
-#        print(start)
+#        print(file)
         results_dict = {}
         book_name = file.split('.')[0]
+        
+#        print("book name = ", book_name)
         results_file = book_name + '_resuts.csv'
         char_file = os.listdir(character_dir + book_name)[0]
-        char_list = pandas.read_csv(character_dir + book_name + '/' + char_file)[['name']].copy()
+        char_list = pandas.read_csv(character_dir + book_name + '/' + char_file, engine='python')[['name']].copy()
         char_list['in_book'] = False
         char_list['in_character_list'] = True
         
@@ -41,15 +43,6 @@ def main():
 
         f = open(books_dir + file)
         i = 0
-        
-#        tag_val = 'John'
-#        search = char_list['name'].str.contains(tag_val)
-#        print((search == False).all())
-#        if (search == False).all():
-#            char_list = char_list.append({'name': tag_val, 'in_book': True, 'in_character_list': False}, ignore_index=True)
-#        else:
-#            char_list.loc[search,'in_book'] = True
-#        print(char_list)
 
         for line in f:
             # run tagger
